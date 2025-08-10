@@ -34,4 +34,7 @@ public class Proyecto {
     @Column(name = "fecha_fin")
     @Temporal(TemporalType.DATE)
     private LocalDate fechaFin;
+
+    @ManyToMany(mappedBy = "proyectos")
+    private Set<Empleado> empleados = new HashSet<>();
 }
