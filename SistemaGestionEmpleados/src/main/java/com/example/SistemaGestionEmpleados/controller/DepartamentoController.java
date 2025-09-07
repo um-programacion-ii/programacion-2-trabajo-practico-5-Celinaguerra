@@ -1,6 +1,9 @@
 package com.example.SistemaGestionEmpleados.controller;
 
+import com.example.SistemaGestionEmpleados.model.Departamento;
 import com.example.SistemaGestionEmpleados.service.DepartamentoService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,5 +18,32 @@ public class DepartamentoController {
 
     public DepartamentoController(DepartamentoService departamentoService) {
         this.departamentoService = departamentoService;
+    }
+
+    @GetMapping
+    public List<Departamento> obtenerTodos() {
+        return departamentoService.obtenerTodos();
+    }
+
+    @GetMapping("/{id}")
+    public Departamento obtenerPorId(@PathVariable Long id) {
+        return departamentoService.buscarPorId(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Departamento crear(@Valid @RequestBody Departamento departamento) {
+        return departamentoService.guardar(departamento);
+    }
+
+    @PutMapping("/{id}")
+    public Departamento actualizar(@PathVariable Long id, @Valid @RequestBody Departamento departamento) {
+        return departamentoService.actualizar(id, departamento);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void eliminar(@PathVariable Long id) {
+        departamentoService.eliminar(id);
     }
 }
