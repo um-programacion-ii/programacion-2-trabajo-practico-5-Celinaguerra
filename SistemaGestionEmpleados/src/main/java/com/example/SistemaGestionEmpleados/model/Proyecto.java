@@ -1,5 +1,6 @@
 package com.example.SistemaGestionEmpleados.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +17,9 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
+@Builder
 public class Proyecto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +40,6 @@ public class Proyecto {
     private LocalDate fechaFin;
 
     @ManyToMany(mappedBy = "proyectos")
+    @JsonIgnore
     private Set<Empleado> empleados = new HashSet<>();
 }

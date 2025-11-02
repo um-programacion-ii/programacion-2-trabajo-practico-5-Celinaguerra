@@ -13,6 +13,9 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
+@Getter
+@Builder
 public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
