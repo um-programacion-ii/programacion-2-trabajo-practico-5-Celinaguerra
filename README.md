@@ -1,3 +1,6 @@
+Alumno: Celina Anahí Guerra Díaz
+-------
+
 # 🚀 Trabajo Práctico: Sistema de Gestión de Empleados con JPA y Spring Boot
 
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.0-green)
@@ -721,7 +724,7 @@ spring:
 
 #### Docker Compose
 ```yaml
-# docker-compose.yml
+# docker-compose.yaml
 services:
   mysql:
     image: mysql:8.0
@@ -1062,3 +1065,87 @@ Cada archivo debe seguir este formato:
 ## 📝 Licencia
 
 Este trabajo es parte del curso de Programación II de Ingeniería en Informática. Uso educativo únicamente.
+
+# Sistema de Gestión de Empleados
+ 
+Aplicación que permite gestionar empleados, departamentos y proyectos.  
+Soporta las db H2, MySQL y PostgreSQL y puede ejecutarse con Docker Compose.
+
+---
+
+## Documentación de Endpoints
+
+- GET /api/empleados : Lista todos los empleados
+- GET /api/empleados/{id} : Obtiene un empleado por su ID
+- POST /api/empleados : Crea un nuevo empleado
+- PUT /api/empleados/{id} : Actualiza un empleado existente
+- DELETE /api/empleados/{id} : Elimina un empleado por su ID
+- GET /api/empleados/departamento/{nombre} : Lista empleados de un departamento
+- GET /api/empleados/salario?min={min}&max={max} : Lista empleados por rango de salario
+
+
+- GET /api/departamentos : Lista todos los departamentos
+- GET /api/departamentos/{id} : Obtiene un departamento por su ID
+- POST /api/departamentos : Crea un nuevo departamento
+- PUT /api/departamentos/{id} : Actualiza un departamento
+- DELETE /api/departamentos/{id} : Elimina un departamento
+
+
+- GET /api/proyectos : Lista todos los proyectos
+- GET /api/proyectos/{id} : Obtiene un proyecto por su ID
+- POST /api/proyectos : Crea un nuevo proyecto
+- PUT /api/proyectos/{id} : Actualiza un proyecto
+- DELETE /api/proyectos/{id} : Elimina un proyecto
+- GET /api/proyectos/activos : Lista proyectos activos
+- POST /api/proyectos/{proyectoId}/empleados/{empleadoId} : Asigna empleados a un proyecto
+---
+
+## Instrucciones
+
+Este sistema puede ejecutarse con H2 o mediante Docker con MySQL o PostgreSQL.
+
+
+
+### Instalación
+
+```bash
+git clone <URL_DEL_REPOSITORIO>
+cd SistemaGestionEmpleados
+````
+2. Ejecuta la aplicación con el perfil dev:
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=dev
+```
+Una vez iniciada, puedes acceder a la API en http://localhost:8080 y a la consola de la base de datos H2 en http://localhost:8080/h2-console (JDBC URL: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE).
+
+Para usar con MySQL:
+
+1. Limpia el entorno anterior (si es necesario):
+```bash
+docker compose down
+````
+2. Inicia SÓLO el contenedor de MySQL:
+```bash
+docker compose up mysql
+````
+Deja esta terminal abierta para ver los logs de la base de datos.
+
+3. Inicia tu aplicación: En una nueva terminal, ejecuta el comando de Maven apuntando al perfil mysql:
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=mysql
+````
+
+Para usar con PostgreSQL:
+
+1. Limpia el entorno anterior (si es necesario):
+```bash
+docker compose down
+````
+2. Inicia SÓLO el contenedor de PostgreSQL:
+```bash
+docker compose up postgres
+````
+3. Inicia tu aplicación: En una nueva terminal, ejecuta:
+```bash
+./mvnw spring-boot:run -Dspring-boot.run.profiles=postgres
+````
